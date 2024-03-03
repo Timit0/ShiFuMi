@@ -25,12 +25,12 @@ func update_info():
 
 
 func _on_rock_pressed():
-	pass # Replace with function body.
+	Server.send_choice_from_client_to_serv("rock")
 
 
 func _on_paper_pressed():
-	pass # Replace with function body.
+	Server.send_choice_from_client_to_serv("paper")
 
 
 func _on_scissors_pressed():
-	pass # Replace with function body.
+	Server.send_choice_from_client_to_serv("scissors")

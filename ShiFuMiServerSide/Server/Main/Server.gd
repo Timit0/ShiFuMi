@@ -21,7 +21,7 @@ func _process(delta):
 	if(queue.size() > 0 && queue.size() % 2 == 0):
 		var queue_len = queue.size() - 1;
 		
-		var client_values : Dictionary = {"score" : 5}
+		var client_values : Dictionary = {"score" : 0, "client_choice" : null}
 		var clients : Dictionary = {queue[queue_len] : client_values, queue[queue_len - 1] : client_values}
 		
 		queue.remove_at(queue_len)
@@ -41,7 +41,6 @@ func StartServer() -> void:
 
 func _peer_connected(player_id) -> void :
 	print("User " + str(player_id) + " Connected");
-	#queue.append(player_id);
 
 func _peer_disconnected(player_id) -> void :
 	print("User " + str(player_id) + " Disconnected");
@@ -70,4 +69,17 @@ func go_to_game_scene(id : int):
 @rpc("call_remote")
 func update_clients_dic(id : int, dic : Dictionary):
 	rpc_id(id, "update_clients_dic", dic)
+	
+@rpc("any_peer")
+func send_choice_from_client_to_serv(id : int, choice : String):
+	print("CHOICE "+choice+" ID "+str(id))
+	var childrens = get_children()
+	for child in childrens:
+		if child is GameModel:
+			for key in child.clients:
+				if key == id:
+					var value = child.clients[key]
+					value["client_choice"] = choice
+					print("Key "+str(key)+" Id "+str(id))
+					return
 	

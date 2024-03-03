@@ -57,6 +57,9 @@ func update_clients_dic(dic : Dictionary):
 	print(dic)
 	clients = dic
 	
+@rpc
+func send_choice_from_client_to_serv(choice : String):
+	rpc_id(1, "send_choice_from_client_to_serv", get_id(), choice)
 	
 	
 	
