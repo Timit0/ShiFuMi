@@ -21,7 +21,8 @@ func _process(delta):
 	if(queue.size() > 0 && queue.size() % 2 == 0):
 		var queue_len = queue.size() - 1;
 		
-		var clients : Dictionary = {queue[queue_len] : 0, queue[queue_len - 1] : 0}
+		var client_values : Dictionary = {"score" : 5}
+		var clients : Dictionary = {queue[queue_len] : client_values, queue[queue_len - 1] : client_values}
 		
 		queue.remove_at(queue_len)
 		queue.remove_at(queue_len-1)

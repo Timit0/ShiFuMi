@@ -5,31 +5,97 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kgjng")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="LabelInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Main" type="CenterContainer" parent="LabelInfo"]
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="Label" type="Label" parent="CenterContainer"]
+[node name="SceneName" type="Label" parent="LabelInfo/Main"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 200
 text = "GAME"
 
-[node name="Left" type="CenterContainer" parent="."]
+[node name="ContainerPlayerNameLeft" type="CenterContainer" parent="LabelInfo"]
 offset_right = 576.0
 offset_bottom = 64.0
 
-[node name="Me" type="Label" parent="Left"]
+[node name="MyName" type="Label" parent="LabelInfo/ContainerPlayerNameLeft"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "You"
 
-[node name="Right" type="CenterContainer" parent="."]
+[node name="ContainerPlayerNameRight" type="CenterContainer" parent="LabelInfo"]
 offset_left = 576.0
 offset_right = 1152.0
 offset_bottom = 64.0
 
-[node name="Other" type="Label" parent="Right"]
+[node name="OtherName" type="Label" parent="LabelInfo/ContainerPlayerNameRight"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Other"
+
+[node name="ContainerScoreRight" type="CenterContainer" parent="LabelInfo"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 64.0
+offset_right = 744.0
+offset_bottom = 133.0
+
+[node name="OtherScore" type="Label" parent="LabelInfo/ContainerScoreRight"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="ContainerScoreLeft" type="CenterContainer" parent="LabelInfo"]
+offset_left = 408.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 133.0
+
+[node name="MyScore" type="Label" parent="LabelInfo/ContainerScoreLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Buttons"]
+layout_mode = 0
+offset_top = 512.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Rock" type="Button" parent="Buttons/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Rock"
+
+[node name="Paper" type="Button" parent="Buttons/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Paper"
+
+[node name="scissors" type="Button" parent="Buttons/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Scissors"
+
+[connection signal="pressed" from="Buttons/CenterContainer/HBoxContainer/Rock" to="." method="_on_rock_pressed"]
+[connection signal="pressed" from="Buttons/CenterContainer/HBoxContainer/Paper" to="." method="_on_paper_pressed"]
+[connection signal="pressed" from="Buttons/CenterContainer/HBoxContainer/scissors" to="." method="_on_scissors_pressed"]

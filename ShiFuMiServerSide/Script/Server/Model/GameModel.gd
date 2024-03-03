@@ -2,5 +2,5 @@ extends Node
 class_name GameModel
 
 #key -> client_id
-#value -> point
+#value -> clients_values
 var clients : Dictionary = {};
