@@ -22,7 +22,7 @@ func _process(delta):
 		var queue_len = queue.size() - 1;
 		
 		var client_values : Dictionary = {"score" : 0, "client_choice" : null}
-		var clients : Dictionary = {queue[queue_len] : client_values, queue[queue_len - 1] : client_values}
+		var clients : Dictionary = {queue[queue_len] : client_values.duplicate(), queue[queue_len - 1] : client_values.duplicate()}
 		
 		queue.remove_at(queue_len)
 		queue.remove_at(queue_len-1)
@@ -67,19 +67,20 @@ func go_to_game_scene(id : int):
 	rpc_id(id, "go_to_game_scene");
 	
 @rpc("call_remote")
+func go_to_game_winner(id : int, winner_id):
+	rpc_id(id, "go_to_game_winner", winner_id);
+	
+@rpc("call_remote")
 func update_clients_dic(id : int, dic : Dictionary):
 	rpc_id(id, "update_clients_dic", dic)
 	
 @rpc("any_peer")
 func send_choice_from_client_to_serv(id : int, choice : String):
-	print("CHOICE "+choice+" ID "+str(id))
 	var childrens = get_children()
 	for child in childrens:
 		if child is GameModel:
 			for key in child.clients:
 				if key == id:
-					var value = child.clients[key]
-					value["client_choice"] = choice
-					print(value)
+					child.clients[key]["client_choice"] = choice
 					return
 	

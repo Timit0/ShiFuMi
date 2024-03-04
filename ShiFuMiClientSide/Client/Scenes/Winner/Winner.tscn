@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt5q2cn02gb76"]
+
+[ext_resource type="Script" path="res://Client/Scenes/Winner/Winner.gd" id="1_ijyr3"]
+
+[node name="Winner" type="Node2D"]
+script = ExtResource("1_ijyr3")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="WinnerLabel" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 175
+text = "Winner"
+
+[node name="CenterContainerLobby" type="CenterContainer" parent="."]
+offset_top = 512.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="LobbyButton" type="Button" parent="CenterContainerLobby"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Lobby"
+
+[connection signal="pressed" from="CenterContainerLobby/LobbyButton" to="." method="_on_lobby_button_pressed"]

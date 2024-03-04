@@ -5,6 +5,7 @@ var ip = "127.0.0.1";
 var port = 1909;
 
 signal change_to_this_scene_signal
+signal change_to_winner_scene_signal
 signal add_in_queue_signal
 
 var clients : Dictionary
@@ -62,6 +63,9 @@ func send_choice_from_client_to_serv(choice : String):
 	rpc_id(1, "send_choice_from_client_to_serv", get_id(), choice)
 	
 	
+@rpc("authority")
+func go_to_game_winner(winner_id):
+	change_to_winner_scene_signal.emit(winner_id)
 	
 	
 	

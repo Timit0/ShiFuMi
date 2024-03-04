@@ -12,6 +12,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Main" type="CenterContainer" parent="LabelInfo"]
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
@@ -21,6 +22,7 @@ theme_override_font_sizes/font_size = 200
 text = "GAME"
 
 [node name="ContainerPlayerNameLeft" type="CenterContainer" parent="LabelInfo"]
+layout_mode = 0
 offset_right = 576.0
 offset_bottom = 64.0
 
@@ -30,6 +32,7 @@ theme_override_font_sizes/font_size = 30
 text = "You"
 
 [node name="ContainerPlayerNameRight" type="CenterContainer" parent="LabelInfo"]
+layout_mode = 0
 offset_left = 576.0
 offset_right = 1152.0
 offset_bottom = 64.0
@@ -54,6 +57,7 @@ theme_override_font_sizes/font_size = 50
 text = "0"
 
 [node name="ContainerScoreLeft" type="CenterContainer" parent="LabelInfo"]
+layout_mode = 0
 offset_left = 408.0
 offset_top = 64.0
 offset_right = 448.0
