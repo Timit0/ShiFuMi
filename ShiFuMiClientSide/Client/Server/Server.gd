@@ -50,7 +50,7 @@ func print_on_client(message: String):
 	
 @rpc("authority")
 func go_to_game_scene():
-	change_to_this_scene_signal.emit()
+	change_to_this_scene_signal.emit("game_scene")
 	
 @rpc("authority")
 func update_clients_dic(dic : Dictionary):

@@ -80,6 +80,6 @@ func send_choice_from_client_to_serv(id : int, choice : String):
 				if key == id:
 					var value = child.clients[key]
 					value["client_choice"] = choice
-					print("Key "+str(key)+" Id "+str(id))
+					print(value)
 					return
 	
