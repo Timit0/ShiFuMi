@@ -100,7 +100,9 @@ func choice_point(p1, p2, k1, k2):
 		return str(k1)
 	
 	if p1 == null && p2 == null:
-		#TODO end the game
+		server.go_to_lobby_scene(k1)
+		server.go_to_lobby_scene(k2)
+		queue_free()
 		return
 	
 	if p1 == p2:

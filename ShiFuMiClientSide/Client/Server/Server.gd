@@ -40,8 +40,11 @@ func go_to_game_scene():
 	change_to_this_scene_signal.emit("game_scene")
 	
 @rpc("authority")
+func go_to_lobby_scene():
+	change_to_this_scene_signal.emit("lobby_scene")
+	
+@rpc("authority")
 func update_clients_dic(dic : Dictionary):
-	print(dic)
 	clients = dic
 	
 @rpc

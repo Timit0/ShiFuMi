@@ -24,6 +24,8 @@ func _process(delta):
 		queue.remove_at(queue_len-1)
 		
 		var instance_of_game_scene = game_scene.instantiate() as Game
+		print(instance_of_game_scene)
+		print(instance_of_game_scene.clients)
 		instance_of_game_scene.clients = clients;
 		add_child(instance_of_game_scene)
 	
@@ -78,9 +80,13 @@ func send_choice_from_client_to_serv(id : int, choice : String):
 				if key == id:
 					child.clients[key]["client_choice"] = choice
 					return
-								
+
 @rpc("call_remote")
 func play_this_animation(id : int, anim_name : String, state_string : String):
 	if client_connected.has(id):
 		rpc_id(id, "play_this_animation", anim_name, state_string)
+		
+@rpc("any_peer")
+func go_to_lobby_scene(id : int):
+	rpc_id(id, "go_to_lobby_scene")
 	
