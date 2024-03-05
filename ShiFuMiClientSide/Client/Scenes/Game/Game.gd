@@ -10,6 +10,8 @@ func _ready():
 	otherScore = get_node("%OtherScore")
 	myScore = get_node("%MyScore")
 	
+	Server.play_this_animation_signal.connect(_on_play_this_animation)
+	
 
 func _process(delta):
 	update_info()
@@ -23,6 +25,10 @@ func update_info():
 		else :
 			myScore.text = str(value["score"])
 
+func _on_play_this_animation(animation_name : String, state_label : String):
+	(get_node("Animation/AnimationPlayer") as AnimationPlayer).play(animation_name)
+	if state_label != "":
+		(get_node("Animation/CenterContainer/State") as Label).text = state_label
 
 func _on_rock_pressed():
 	Server.send_choice_from_client_to_serv("rock")

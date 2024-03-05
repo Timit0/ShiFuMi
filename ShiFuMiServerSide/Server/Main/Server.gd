@@ -6,16 +6,12 @@ var port = 1909;
 var max_players = 100;
 
 var queue : Array = [];
+var client_connected : Array = [];
 
 var game_scene = preload("res://Server/Game/Game.tscn")
 
 func _ready() -> void:
 	StartServer();
-
-func _input(event):
-	if(Input.is_action_just_pressed("ui_accept")):
-		for i in queue:
-			print(i)
 	
 func _process(delta):
 	if(queue.size() > 0 && queue.size() % 2 == 0):
@@ -41,38 +37,37 @@ func StartServer() -> void:
 
 func _peer_connected(player_id) -> void :
 	print("User " + str(player_id) + " Connected");
+	client_connected.append(player_id)
 
 func _peer_disconnected(player_id) -> void :
 	print("User " + str(player_id) + " Disconnected");
 	if(queue.has(player_id)):
 		var index_in_queue = queue.find(player_id);
 		queue.remove_at(index_in_queue);
+	if client_connected.has(player_id):
+		var index_in_queue = client_connected.find(player_id);
+		client_connected.remove_at(index_in_queue);
 	
 @rpc("any_peer")
 func _on_add_in_queue(client_id : int) -> void:
 	if(!queue.has(client_id)):
 		queue.append(client_id)
 		print(str(client_id)+" has join the queue.")
-	
-@rpc("any_peer")
-func print_on_serv(message: String):
-	print(message);
-	
-@rpc("call_remote")
-func print_on_client(player_id: int):
-	rpc_id(player_id, "print_on_client", "AAAAAAAAAAAAAAA");
 
 @rpc("call_remote")
 func go_to_game_scene(id : int):
-	rpc_id(id, "go_to_game_scene");
+	if client_connected.has(id):
+		rpc_id(id, "go_to_game_scene");
 	
 @rpc("call_remote")
 func go_to_game_winner(id : int, winner_id):
-	rpc_id(id, "go_to_game_winner", winner_id);
+	if client_connected.has(id):
+		rpc_id(id, "go_to_game_winner", winner_id);
 	
 @rpc("call_remote")
 func update_clients_dic(id : int, dic : Dictionary):
-	rpc_id(id, "update_clients_dic", dic)
+	if client_connected.has(id):
+		rpc_id(id, "update_clients_dic", dic)
 	
 @rpc("any_peer")
 func send_choice_from_client_to_serv(id : int, choice : String):
@@ -83,4 +78,9 @@ func send_choice_from_client_to_serv(id : int, choice : String):
 				if key == id:
 					child.clients[key]["client_choice"] = choice
 					return
+								
+@rpc("call_remote")
+func play_this_animation(id : int, anim_name : String, state_string : String):
+	if client_connected.has(id):
+		rpc_id(id, "play_this_animation", anim_name, state_string)
 	

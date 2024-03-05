@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bf4op4xvgx03g"]
+[gd_scene load_steps=2 format=3 uid="uid://d02m0vtlijcsr"]
 
-[ext_resource type="Script" path="res://Server/Game/Game.gd" id="1_nd2cp"]
+[ext_resource type="Script" path="res://Server/Game/Game.gd" id="1_3jc3e"]
 
 [node name="Game" type="Node"]
-script = ExtResource("1_nd2cp")
+script = ExtResource("1_3jc3e")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 7.0
+[node name="TimerStart" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="TimerIn" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="TimerEnd" type="Timer" parent="."]
+wait_time = 2.0
