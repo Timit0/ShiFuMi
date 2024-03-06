@@ -13,7 +13,7 @@ func _ready():
 	server = get_parent() as Server
 	for key in clients:
 		var value = clients[key]
-		server.go_to_game_scene(key)
+		server.go_to_this_scene(key, "game_scene", {})
 		server.update_clients_dic(key, clients)
 		server.play_this_animation(key, "RESET", "Jouez !")
 		
@@ -61,10 +61,10 @@ func _on_timer_in_timeout():
 			clients[int(winner)]["score"] += 1
 		else:
 			clients[int(winner)]["score"] += 1
-			print("change")
 			for key in clients:
 				var value = clients[key]
-				server.go_to_game_winner(key, int(winner))
+				var args : Dictionary = {"winner_id":winner}
+				server.go_to_this_scene(key, "winner_scene", args.duplicate())
 			queue_free()
 			
 	for key in clients:
@@ -100,8 +100,8 @@ func choice_point(p1, p2, k1, k2):
 		return str(k1)
 	
 	if p1 == null && p2 == null:
-		server.go_to_lobby_scene(k1)
-		server.go_to_lobby_scene(k2)
+		server.go_to_this_scene(k1, "lobby_scene", {})
+		server.go_to_this_scene(k2, "lobby_scene", {})
 		queue_free()
 		return
 	

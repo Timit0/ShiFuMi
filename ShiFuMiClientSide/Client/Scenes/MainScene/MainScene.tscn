@@ -1,6 +1,67 @@
-[gd_scene load_steps=2 format=3 uid="uid://duwpawss7qk7j"]
+[gd_scene load_steps=8 format=3 uid="uid://duwpawss7qk7j"]
 
 [ext_resource type="Script" path="res://Client/Scenes/MainScene/MainScene.gd" id="1_6ustg"]
+[ext_resource type="Shader" path="res://Client/Shaders/Vhs/Vhs.gdshader" id="2_wr37m"]
+[ext_resource type="Shader" path="res://Client/Shaders/Pencil/Pencil.gdshader" id="3_0t3a1"]
+[ext_resource type="Texture2D" uid="uid://ca1eqhviyeeua" path="res://Client/Shaders/Pencil/parchment-150x150.jpg" id="4_d0aoo"]
+[ext_resource type="Texture2D" uid="uid://i5fkm607kr3e" path="res://Client/Shaders/Pencil/pencil-150x150.jpg" id="5_133ms"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2cq3"]
+shader = ExtResource("2_wr37m")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.1
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.5
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.00100005
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.2
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.6
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1t1s"]
+shader = ExtResource("3_0t3a1")
+shader_parameter/u_bgColor = Color(1, 1, 1, 1)
+shader_parameter/u_bgColorFactor = 0.4
+shader_parameter/u_patternColor = Color(0, 0, 0, 1)
+shader_parameter/u_threshold1 = 0.75
+shader_parameter/u_threshold2 = 0.245
+shader_parameter/u_threshold3 = 0.362
+shader_parameter/u_threshold4 = 0.05
+shader_parameter/u_bgTiling = Vector2(1, 1)
+shader_parameter/u_patternTiling = Vector2(1, 1)
+shader_parameter/u_bgTexture = ExtResource("4_d0aoo")
+shader_parameter/u_patternTexture = ExtResource("5_133ms")
 
 [node name="MainScene" type="Node"]
 script = ExtResource("1_6ustg")
+
+[node name="Scene" type="Node" parent="."]
+
+[node name="Effect" type="Node" parent="."]
+
+[node name="VHS" type="ColorRect" parent="Effect"]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_u2cq3")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Effect"]
+z_index = 1
+material = SubResource("ShaderMaterial_e1t1s")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2

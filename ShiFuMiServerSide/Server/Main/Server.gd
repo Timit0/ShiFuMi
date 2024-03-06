@@ -56,15 +56,15 @@ func _on_add_in_queue(client_id : int) -> void:
 		queue.append(client_id)
 		print(str(client_id)+" has join the queue.")
 
-@rpc("call_remote")
-func go_to_game_scene(id : int):
-	if client_connected.has(id):
-		rpc_id(id, "go_to_game_scene");
-	
-@rpc("call_remote")
-func go_to_game_winner(id : int, winner_id):
-	if client_connected.has(id):
-		rpc_id(id, "go_to_game_winner", winner_id);
+#@rpc("call_remote")
+#func go_to_game_scene(id : int):
+	#if client_connected.has(id):
+		#rpc_id(id, "go_to_game_scene");
+	#
+#@rpc("call_remote")
+#func go_to_game_winner(id : int, winner_id):
+	#if client_connected.has(id):
+		#rpc_id(id, "go_to_game_winner", winner_id);
 	
 @rpc("call_remote")
 func update_clients_dic(id : int, dic : Dictionary):
@@ -86,8 +86,13 @@ func play_this_animation(id : int, anim_name : String, state_string : String):
 	if client_connected.has(id):
 		rpc_id(id, "play_this_animation", anim_name, state_string)
 		
+#@rpc("call_remote")
+#func go_to_lobby_scene(id : int):
+	#if client_connected.has(id):
+		#rpc_id(id, "go_to_lobby_scene")
+		
 @rpc("call_remote")
-func go_to_lobby_scene(id : int):
-	if client_connected.has(id):
-		rpc_id(id, "go_to_lobby_scene")
+func go_to_this_scene(client_id : int, scene_name : String, args : Dictionary):
+	if client_connected.has(client_id):
+		rpc_id(client_id, "go_to_this_scene", scene_name, args)
 	

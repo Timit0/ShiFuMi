@@ -35,13 +35,13 @@ func get_id() -> int:
 func _on_add_in_queue():
 	rpc_id(1, "_on_add_in_queue", get_id())
 	
-@rpc("authority")
-func go_to_game_scene():
-	change_to_this_scene_signal.emit("game_scene")
-	
-@rpc("authority")
-func go_to_lobby_scene():
-	change_to_this_scene_signal.emit("lobby_scene")
+#@rpc("authority")
+#func go_to_game_scene():
+	#change_to_this_scene_signal.emit("game_scene")
+	#
+#@rpc("authority")
+#func go_to_lobby_scene():
+	#change_to_this_scene_signal.emit("lobby_scene")
 	
 @rpc("authority")
 func update_clients_dic(dic : Dictionary):
@@ -52,13 +52,17 @@ func send_choice_from_client_to_serv(choice : String):
 	rpc_id(1, "send_choice_from_client_to_serv", get_id(), choice)
 	
 	
-@rpc("authority")
-func go_to_game_winner(winner_id):
-	change_to_winner_scene_signal.emit(winner_id)
+#@rpc("authority")
+#func go_to_game_winner(winner_id):
+	#change_to_winner_scene_signal.emit(winner_id)
 	
 @rpc("authority")
 func play_this_animation(anim_name : String, state_string : String):
 	play_this_animation_signal.emit(anim_name, state_string)
+	
+@rpc("authority")
+func go_to_this_scene(scene_name : String, args : Dictionary):
+	change_to_this_scene_signal.emit(scene_name, args)
 	
 	
 	
