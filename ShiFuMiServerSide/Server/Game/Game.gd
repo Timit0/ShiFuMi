@@ -16,6 +16,7 @@ func _ready():
 		server.go_to_this_scene(key, "game_scene", {})
 		server.update_clients_dic(key, clients)
 		server.play_this_animation(key, "RESET", "Jouez !")
+		server.play_this_hand_animation(key, clients)
 		
 	timer_start.start()
 	
@@ -69,12 +70,17 @@ func _on_timer_in_timeout():
 			
 	for key in clients:
 		var value = clients[key]
+		var anim_name = "idle"
+		if value["client_choice"] != null:
+			anim_name = value["client_choice"]
 		server.update_clients_dic(key, clients)
+		server.play_this_hand_animation(key, clients)
 		clients[key]["client_choice"] = null
 		
 func _on_timer_end_timeout():
 	for key in clients:
 		server.play_this_animation(key, "RESET", "Play")
+		server.play_this_hand_animation(key, clients)
 	timer_start.start()
 	
 func timer_initialize():
@@ -111,5 +117,3 @@ func choice_point(p1, p2, k1, k2):
 		return str(k1)
 	else:
 		return str(k2)
-
-

@@ -52,7 +52,6 @@ script = ExtResource("1_6ustg")
 [node name="Effect" type="Node" parent="."]
 
 [node name="VHS" type="ColorRect" parent="Effect"]
-visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_u2cq3")
 offset_right = 1152.0
@@ -60,6 +59,7 @@ offset_bottom = 648.0
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="Effect"]
+visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_e1t1s")
 offset_right = 1152.0

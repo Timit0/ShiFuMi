@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdmg7tx7cdhn2"]
+[gd_scene load_steps=2 format=3 uid="uid://cjgpiqtauwv1h"]
 
-[ext_resource type="Script" path="res://Server/Game/Game.gd" id="1_vjve5"]
+[ext_resource type="Script" path="res://Server/Game/Game.gd" id="1_ubg5x"]
 
 [node name="Game" type="Node"]
-script = ExtResource("1_vjve5")
+script = ExtResource("1_ubg5x")
 
 [node name="TimerStart" type="Timer" parent="."]
 wait_time = 4.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://csico8c3feddt"]
+[gd_scene load_steps=8 format=3 uid="uid://csico8c3feddt"]
 
 [ext_resource type="Script" path="res://Client/Scenes/Game/Game.gd" id="1_kgjng"]
 [ext_resource type="Script" path="res://Client/Scenes/Game/Button/ButtonChoice.gd" id="3_06sf8"]
+[ext_resource type="PackedScene" uid="uid://duxryyrsyd42i" path="res://Client/Hands/Hand.tscn" id="3_kax41"]
 
 [sub_resource type="Animation" id="Animation_psxst"]
 resource_name = "RESET"
@@ -262,6 +263,16 @@ theme_override_font_sizes/font_size = 50
 text = "Scissors"
 script = ExtResource("3_06sf8")
 returned_val = 2
+
+[node name="Hands" type="Node2D" parent="."]
+
+[node name="Hand_your" parent="Hands" instance=ExtResource("3_kax41")]
+position = Vector2(288, 328)
+
+[node name="Hand_other" parent="Hands" instance=ExtResource("3_kax41")]
+position = Vector2(880, 320)
+scale = Vector2(-1, 1)
+am_i_other = true
 
 [connection signal="pressed" from="Buttons/CenterContainer/HBoxContainer/Rock" to="." method="_on_rock_pressed"]
 [connection signal="pressed" from="Buttons/CenterContainer/HBoxContainer/Paper" to="." method="_on_paper_pressed"]
