@@ -67,14 +67,12 @@ func _on_timer_in_timeout():
 				var args : Dictionary = {"winner_id":winner}
 				server.go_to_this_scene(key, "winner_scene", args.duplicate())
 			queue_free()
+	for key in clients:
+		server.play_this_hand_animation(key, clients)
 			
 	for key in clients:
 		var value = clients[key]
-		var anim_name = "idle"
-		if value["client_choice"] != null:
-			anim_name = value["client_choice"]
 		server.update_clients_dic(key, clients)
-		server.play_this_hand_animation(key, clients)
 		clients[key]["client_choice"] = null
 		
 func _on_timer_end_timeout():

@@ -77,6 +77,7 @@ func play_this_animation(id : int, anim_name : String, state_string : String):
 @rpc("call_remote")
 func play_this_hand_animation(id : int, clients : Dictionary):
 	if client_connected.has(id):
+		print(clients)
 		rpc_id(id, "play_this_hand_animation", clients)
 		
 @rpc("call_remote")

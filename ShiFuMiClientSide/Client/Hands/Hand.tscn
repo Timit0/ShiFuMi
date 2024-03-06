@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://duxryyrsyd42i"]
+[gd_scene load_steps=9 format=3 uid="uid://duxryyrsyd42i"]
 
 [ext_resource type="Texture2D" uid="uid://j2d21fpnbgyc" path="res://Assets/Hand/Rock.png" id="1_n1wlb"]
-[ext_resource type="Script" path="res://Client/Hands/Hand.gd" id="1_r4b6n"]
 [ext_resource type="Texture2D" uid="uid://cygp80300f5vi" path="res://Assets/Hand/Paper.png" id="2_tb61q"]
 [ext_resource type="Texture2D" uid="uid://361qajq4qtrf" path="res://Assets/Hand/Scissors.png" id="3_uf10b"]
 
@@ -210,7 +209,6 @@ _data = {
 }
 
 [node name="Hand" type="Node2D"]
-script = ExtResource("1_r4b6n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -240,3 +238,11 @@ texture = ExtResource("3_uf10b")
 offset = Vector2(1120, 0)
 hframes = 2
 vframes = 2
+
+[node name="Label" type="Label" parent="."]
+offset_left = 112.0
+offset_top = -96.0
+offset_right = 207.0
+offset_bottom = -27.0
+theme_override_font_sizes/font_size = 50
+text = "info"

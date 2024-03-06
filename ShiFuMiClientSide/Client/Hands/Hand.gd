@@ -6,8 +6,10 @@ var animation_player : AnimationPlayer
 @export
 var am_i_other : bool
 
+var label : Label
+
 func _ready():
-	print(am_i_other)
+	label = get_node("Label")
 	animation_player = get_node("AnimationPlayer") as AnimationPlayer
 	Server.play_this_hand_animation_signal.connect(_on_play_this_hand_animation)
 	
@@ -17,7 +19,7 @@ func _on_play_this_hand_animation(clients : Dictionary):
 	for key in clients:
 		if key != iam:
 			not_me = key
-	if am_i_other:
+	if name.contains("other"):
 		if clients[not_me]["client_choice"] != null:
 			animation_player.play(clients[not_me]["client_choice"])
 		else:
