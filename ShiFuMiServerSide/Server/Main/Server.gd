@@ -86,7 +86,8 @@ func play_this_animation(id : int, anim_name : String, state_string : String):
 	if client_connected.has(id):
 		rpc_id(id, "play_this_animation", anim_name, state_string)
 		
-@rpc("any_peer")
+@rpc("call_remote")
 func go_to_lobby_scene(id : int):
-	rpc_id(id, "go_to_lobby_scene")
+	if client_connected.has(id):
+		rpc_id(id, "go_to_lobby_scene")
 	
