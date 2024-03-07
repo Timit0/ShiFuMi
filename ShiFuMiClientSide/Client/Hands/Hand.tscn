@@ -216,13 +216,14 @@ libraries = {
 }
 
 [node name="Rock" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-320, 0)
+rotation = -0.0363028
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_n1wlb")
 offset = Vector2(2213.33, 640)
 
 [node name="Paper" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-336, 0)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_tb61q")

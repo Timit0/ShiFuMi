@@ -47,7 +47,6 @@ func _on_timer_in_timeout():
 		i += 1
 		
 	winner = choice_point(client_1, client_2, key1, key2)
-	
 	timer_hand.start()
 	
 	for key in clients:
@@ -59,6 +58,7 @@ func _on_timer_in_timeout():
 		else :
 			s = "Vous avez perdu"
 		server.play_this_animation(key, "hand", "")
+		server.play_this_hand_animation(key, clients)
 	
 	if(winner != "draw" && winner != null):
 		if clients[int(winner)]["score"] + 1 < 3: 
@@ -79,8 +79,12 @@ func _on_timer_in_timeout():
 		
 func _on_timer_hand_timeout():
 	timer_end.start()
+	var idle : Dictionary = clients.duplicate()
 	for key in clients:
-		server.play_this_hand_animation(key, clients)
+		idle = {key : {"client_choice":null}}
+		
+	for key in clients:
+		server.play_hand_idle(key)
 		
 	for key in clients:
 		var s : String
@@ -100,7 +104,7 @@ func _on_timer_hand_timeout():
 func _on_timer_end_timeout():
 	for key in clients:
 		server.play_this_animation(key, "RESET", "Play")
-		server.play_this_hand_animation(key, clients)
+		server.play_hand_idle(key)
 	timer_start.start()
 	
 func timer_initialize():

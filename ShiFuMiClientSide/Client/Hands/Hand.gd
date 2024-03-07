@@ -9,6 +9,7 @@ var am_i_other : bool
 func _ready():
 	animation_player = get_node("AnimationPlayer") as AnimationPlayer
 	Server.play_this_hand_animation_signal.connect(_on_play_this_hand_animation)
+	Server.play_animation_idle_signal.connect(_on_play_idle_animation)
 	
 func _on_play_this_hand_animation(clients : Dictionary):
 	var iam = Server.get_id()
@@ -26,3 +27,6 @@ func _on_play_this_hand_animation(clients : Dictionary):
 			animation_player.play(clients[iam]["client_choice"])
 		else:
 			animation_player.play("idle")
+			
+func _on_play_idle_animation():
+	animation_player.play("idle")

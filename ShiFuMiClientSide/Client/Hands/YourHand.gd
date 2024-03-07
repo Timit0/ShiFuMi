@@ -2,6 +2,7 @@ extends Hand
 class_name YourHand
 
 func _on_play_this_hand_animation(clients : Dictionary):
+	print("ANIM HAND NAME")
 	var my_id = Server.get_id()
 	
 	var my_choice = clients[my_id]["client_choice"]

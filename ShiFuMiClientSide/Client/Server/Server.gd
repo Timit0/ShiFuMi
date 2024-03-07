@@ -8,6 +8,7 @@ signal change_to_this_scene_signal
 signal change_to_winner_scene_signal
 signal add_in_queue_signal
 signal play_this_animation_signal
+signal play_animation_idle_signal
 signal play_this_hand_animation_signal
 
 var clients : Dictionary
@@ -51,6 +52,10 @@ func play_this_hand_animation(clients : Dictionary):
 @rpc("authority")
 func play_this_animation(anim_name : String, state_string : String):
 	play_this_animation_signal.emit(anim_name, state_string)
+	
+@rpc("authority")
+func play_hand_idle():
+	play_animation_idle_signal.emit()
 	
 @rpc("authority")
 func go_to_this_scene(scene_name : String, args : Dictionary):

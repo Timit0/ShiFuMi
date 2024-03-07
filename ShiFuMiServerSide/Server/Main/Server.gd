@@ -81,6 +81,11 @@ func play_this_hand_animation(id : int, clients : Dictionary):
 		rpc_id(id, "play_this_hand_animation", clients)
 		
 @rpc("call_remote")
+func play_hand_idle(id : int):
+	if client_connected.has(id):
+		rpc_id(id, "play_hand_idle")
+		
+@rpc("call_remote")
 func go_to_this_scene(client_id : int, scene_name : String, args : Dictionary):
 	if client_connected.has(client_id):
 		if args != {}:
