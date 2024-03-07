@@ -8,6 +8,5 @@ func _on_play_this_hand_animation(clients : Dictionary):
 	
 	if my_choice != null:
 		animation_player.play(my_choice)
-		label.text = my_choice
 	else :
 		animation_player.play("idle")

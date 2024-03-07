@@ -238,11 +238,3 @@ texture = ExtResource("3_uf10b")
 offset = Vector2(1120, 0)
 hframes = 2
 vframes = 2
-
-[node name="Label" type="Label" parent="."]
-offset_left = 112.0
-offset_top = -96.0
-offset_right = 207.0
-offset_bottom = -27.0
-theme_override_font_sizes/font_size = 50
-text = "info"

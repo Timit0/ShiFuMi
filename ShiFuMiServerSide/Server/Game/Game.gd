@@ -6,6 +6,9 @@ var server : Server
 var timer_in : Timer
 var timer_start : Timer
 var timer_end : Timer
+var timer_hand : Timer
+
+var winner : String
 
 func _ready():
 	timer_initialize()
@@ -43,9 +46,9 @@ func _on_timer_in_timeout():
 			key2 = key
 		i += 1
 		
-	var winner = choice_point(client_1, client_2, key1, key2)
+	winner = choice_point(client_1, client_2, key1, key2)
 	
-	timer_end.start()
+	timer_hand.start()
 	
 	for key in clients:
 		var s : String
@@ -55,7 +58,7 @@ func _on_timer_in_timeout():
 			s = "Egalité"
 		else :
 			s = "Vous avez perdu"
-		server.play_this_animation(key, "end", s)
+		server.play_this_animation(key, "hand", "")
 	
 	if(winner != "draw" && winner != null):
 		if clients[int(winner)]["score"] + 1 < 3: 
@@ -67,11 +70,30 @@ func _on_timer_in_timeout():
 				var args : Dictionary = {"winner_id":winner}
 				server.go_to_this_scene(key, "winner_scene", args.duplicate())
 			queue_free()
-	for key in clients:
-		server.play_this_hand_animation(key, clients)
+	#for key in clients:
+		#server.play_this_hand_animation(key, clients)
 			
 	for key in clients:
 		var value = clients[key]
+		#clients[key]["client_choice"] = null
+		
+func _on_timer_hand_timeout():
+	timer_end.start()
+	for key in clients:
+		server.play_this_hand_animation(key, clients)
+		
+	for key in clients:
+		var s : String
+		if str(key) == winner:
+			s = "Vous avez gagnez"
+		elif winner == "draw" :
+			s = "Egalité"
+		else :
+			s = "Vous avez perdu"
+		server.play_this_animation(key, "end", s)
+			
+	for key in clients:
+		#var value = clients[key]
 		server.update_clients_dic(key, clients)
 		clients[key]["client_choice"] = null
 		
@@ -93,6 +115,10 @@ func timer_initialize():
 	timer_end = get_node("TimerEnd") as Timer
 	timer_end.one_shot = true
 	timer_end.timeout.connect(_on_timer_end_timeout)
+	
+	timer_hand = get_node("TimerHand") as Timer
+	timer_hand.one_shot = true
+	timer_hand.timeout.connect(_on_timer_hand_timeout)
 	
 func choice_point(p1, p2, k1, k2):
 	p1 = p1["client_choice"]

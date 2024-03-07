@@ -11,5 +11,8 @@ wait_time = 4.0
 [node name="TimerIn" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="TimerHand" type="Timer" parent="."]
+wait_time = 2.0
+
 [node name="TimerEnd" type="Timer" parent="."]
 wait_time = 2.0

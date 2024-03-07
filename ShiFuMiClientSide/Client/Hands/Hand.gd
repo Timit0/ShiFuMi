@@ -6,10 +6,7 @@ var animation_player : AnimationPlayer
 @export
 var am_i_other : bool
 
-var label : Label
-
 func _ready():
-	label = get_node("Label")
 	animation_player = get_node("AnimationPlayer") as AnimationPlayer
 	Server.play_this_hand_animation_signal.connect(_on_play_this_hand_animation)
 	
