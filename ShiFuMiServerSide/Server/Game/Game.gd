@@ -8,7 +8,7 @@ var timer_start : Timer
 var timer_end : Timer
 var timer_hand : Timer
 
-var winner : String
+var winner : String = ""
 
 func _ready():
 	timer_initialize()
@@ -45,8 +45,10 @@ func _on_timer_in_timeout():
 			client_2 = value
 			key2 = key
 		i += 1
-		
-	winner = choice_point(client_1, client_2, key1, key2)
+	
+	#winner = choice_point(client_1, client_2, key1, key2)
+	if choice_point(client_1, client_2, key1, key2) != null:
+		winner = choice_point(client_1, client_2, key1, key2)
 	timer_hand.start()
 	
 	for key in clients:
@@ -60,7 +62,7 @@ func _on_timer_in_timeout():
 		server.play_this_animation(key, "hand", "")
 		server.play_this_hand_animation(key, clients)
 	
-	if(winner != "draw" && winner != null):
+	if(winner != "draw" && winner != null && winner != ""):
 		if clients[int(winner)]["score"] + 1 < 3: 
 			clients[int(winner)]["score"] += 1
 		else:
@@ -127,6 +129,9 @@ func timer_initialize():
 func choice_point(p1, p2, k1, k2):
 	p1 = p1["client_choice"]
 	p2 = p2["client_choice"]
+	
+	if k1 == null || k2 == null:
+		return ""
 	
 	if p1 == null && p2 != null:
 		return str(k2)

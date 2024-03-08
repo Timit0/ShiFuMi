@@ -6,7 +6,6 @@
 script = ExtResource("1_m8yyp")
 
 [node name="TimerStart" type="Timer" parent="."]
-wait_time = 4.0
 
 [node name="TimerIn" type="Timer" parent="."]
 wait_time = 3.0
