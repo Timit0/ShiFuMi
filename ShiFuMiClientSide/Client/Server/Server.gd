@@ -1,8 +1,8 @@
 extends Node
 
 var network = ENetMultiplayerPeer.new();
-var ip = "127.0.0.1";
-var port = 1909;
+var ip
+var port
 
 signal change_to_this_scene_signal
 signal change_to_winner_scene_signal
@@ -14,6 +14,7 @@ signal play_this_hand_animation_signal
 var clients : Dictionary
 
 func _ready():
+	load_server_config()
 	ConnectToServer();
 	add_in_queue_signal.connect(_on_add_in_queue)
 	
@@ -32,6 +33,12 @@ func _on_connection_succeeded(id):
 	
 func get_id() -> int:
 	return network.get_unique_id();
+
+func load_server_config()->void:
+	var file = FileAccess.open("res://ServerConfig/ServerConfig.txt", FileAccess.READ)
+	var content = file.get_as_text()
+	ip = content.split(";")[0]
+	port = int(content.split(";")[1])
 	
 @rpc
 func _on_add_in_queue():
