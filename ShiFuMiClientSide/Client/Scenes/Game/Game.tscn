@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://csico8c3feddt"]
+[gd_scene load_steps=13 format=3 uid="uid://csico8c3feddt"]
 
 [ext_resource type="Script" path="res://Client/Scenes/Game/Game.gd" id="1_kgjng"]
 [ext_resource type="Script" path="res://Client/Scenes/Game/Button/ButtonChoice.gd" id="3_06sf8"]
@@ -229,6 +229,38 @@ _data = {
 "in": SubResource("Animation_x44h6")
 }
 
+[sub_resource type="Animation" id="Animation_b6fnn"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.960784), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_43ywa"]
+_data = {
+"RESET": SubResource("Animation_b6fnn")
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kgjng")
 
@@ -367,6 +399,17 @@ script = ExtResource("4_b36gy")
 position = Vector2(880, 320)
 scale = Vector2(-1, 1)
 script = ExtResource("5_lvg58")
+
+[node name="Transition" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.960784)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_43ywa")
+}
 
 [connection signal="pressed" from="Buttons/CenterContainer/HBoxContainer/Rock" to="." method="_on_rock_pressed"]
 [connection signal="pressed" from="Buttons/CenterContainer/HBoxContainer/Paper" to="." method="_on_paper_pressed"]

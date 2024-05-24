@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm1nepc6ngvn7"]
+
+[ext_resource type="Script" path="res://Client/Scenes/Intro/Intro.gd" id="1_bux2y"]
+[ext_resource type="FontFile" uid="uid://chhnjwfwuccur" path="res://Assets/Fonts/Pokemon Hollow.ttf" id="2_ebnvf"]
+
+[sub_resource type="Animation" id="Animation_ckdbj"]
+resource_name = "RESET"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/CenterContainer/TiSeNoMa:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 1, 1.3, 1.6, 2.2, 2.3, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "Ti", "Se", "No", "Ma", "", "Ti", "TiSe", "TiSeNo", "TiSeNoMa"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3.5, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Transition:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yv6of"]
+_data = {
+"RESET": SubResource("Animation_ckdbj")
+}
+
+[node name="Intro" type="Node"]
+script = ExtResource("1_bux2y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yv6of")
+}
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="Node2D"]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TiSeNoMa" type="Label" parent="Node2D/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ebnvf")
+theme_override_font_sizes/font_size = 200
+
+[node name="Transition" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

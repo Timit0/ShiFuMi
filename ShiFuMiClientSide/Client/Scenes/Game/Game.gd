@@ -21,7 +21,7 @@ func _ready():
 	myScore = get_node("%MyScore") as Label
 	
 	Server.play_this_animation_signal.connect(_on_play_this_animation)
-	
+	$AnimationPlayer.play("RESET")
 
 func _process(delta):
 	update_info()
