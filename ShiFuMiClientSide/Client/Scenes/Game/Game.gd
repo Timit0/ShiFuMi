@@ -23,6 +23,7 @@ func _ready():
 	Server.play_this_animation_signal.connect(_on_play_this_animation)
 	$AnimationPlayer.play("RESET")
 
+@warning_ignore("unused_parameter")
 func _process(delta):
 	update_info()
 	
