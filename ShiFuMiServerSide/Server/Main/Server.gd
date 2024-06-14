@@ -2,7 +2,7 @@ extends Node
 class_name Server
 
 var network = ENetMultiplayerPeer.new()
-var port = 1909;
+var port
 var max_players = 100;
 
 var queue : Array = [];
@@ -28,12 +28,18 @@ func _process(delta):
 		add_child(instance_of_game_scene)
 	
 func StartServer() -> void:
+	load_server_config()
 	network.create_server(port, max_players);
 	multiplayer.multiplayer_peer = network;
 	print("server started");
 	
 	network.peer_connected.connect(_peer_connected);
 	network.peer_disconnected.connect(_peer_disconnected);
+	
+func load_server_config()->void:
+	var file = FileAccess.open("res://ServerConfig/Port.txt", FileAccess.READ)
+	var content = file.get_as_text()
+	port = int(content)
 
 func _peer_connected(player_id) -> void :
 	print("User " + str(player_id) + " Connected");
